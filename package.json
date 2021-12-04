@@ -16,10 +16,9 @@
     "url": "https://github.com/projectworking03/netlifytemplate/issues"
   },
   "homepage": "https://github.com/projectworking03/netlifytemplate#readme",
-  "devDependencies": {
-    "node-fetch": "^3.1.0"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "ip": "^1.1.5"
   }
 }
