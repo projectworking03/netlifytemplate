@@ -1,9 +1,10 @@
 const ip = require('ip')
 
 exports.handler = async function(event, context){
-    console.log(ip.address());
+    var ipadd = ip.address("private","ipv6")
+    console.log(ipadd)
     return {
         statusCode: 200,
-        body: JSON.stringify(ip.address)
+        body: JSON.stringify(ipadd)
     }
 }
