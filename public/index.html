@@ -13,6 +13,7 @@
     <button id="fetch-Kanto-pokedex">Fetch Kanto Pokedex</button>
     <button id="fetch-Hoenn-pokedex">Fetch Hoenn Pokedex</button>
     <button id="ip-address">Fetch IP Address</button>
+    <button id="web-scrap-btn">Web Scrap</button>
     <p id="response-output">Response Placeholder</p>
 
     <script>
@@ -23,6 +24,19 @@
         const fetchKantoPoedexBtn = document.getElementById('fetch-Kanto-pokedex')
         const fetchHoennPoedexBtn = document.getElementById('fetch-Hoenn-pokedex')
         const ipAddress = document.getElementById('ip-address')
+        const webScrapBtn = document.getElementById('web-scrap-btn')
+
+        webScrapBtn.addEventListener('click', async() => {
+          const resp = await fetch('/.netlify/functions/web-scrap').then(resp => resp.json())
+          // url = "https://www.bing.com/search?q=venom"
+          // const resp = await fetch(url)
+          //           .then(response => {
+          //             if (response.ok) return response.json()
+          //             throw new Error('Network response was not ok.')
+          //           })
+          //           .then(data => responseText.innerText = JSON.stringify(data));
+          responseText.innerText = JSON.stringify(resp)
+        })
 
         ipAddress.addEventListener('click', async() => {
           const resp = await fetch('/.netlify/functions/get-ip-address').then(resp => resp.json())
