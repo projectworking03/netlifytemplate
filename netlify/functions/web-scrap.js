@@ -2,8 +2,11 @@ const axios = require("axios")
 
 
 exports.handler = async function(event, context){
+    var movie_title 
+    const url = "https://www.bing.com/search?q="+encodeURI(movie_title + " movie")
+    //const POKE_API = 'https://www.bing.com/search?q='+ eventBody.region
     //var url = "https://api.allorigins.win/get?url=https://www.google.com/search?q=Venom:%20Let%20There%20Be%20Carnage"
-    const url = "https://www.bing.com/search?q=venom"
+    //const url = "https://www.bing.com/search?q=venom"
     //var file = fs.createWriteStream('./web.html');
     const a = await axios({
         method:'get',
