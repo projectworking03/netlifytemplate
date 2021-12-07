@@ -4,79 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jamstack Explorers - Up and Running with Serverless Functions</title>
+    <title>MovieHunt API</title>
   </head>
   <body>
-    <h1>Up and Running with Serverless Functions</h1>
-    <button id="fetch-btn">Fetch</button>
-    <button id="fetch-pokedex">Fetch Kanto Pokedex</button>
-    <button id="fetch-Kanto-pokedex">Fetch Kanto Pokedex</button>
-    <button id="fetch-Hoenn-pokedex">Fetch Hoenn Pokedex</button>
-    <button id="ip-address">Fetch IP Address</button>
+    <h1>Server status: OK</h1>
     <button id="web-scrap-btn">Web Scrap</button>
-    <p id="response-output">Response Placeholder</p>
+    <p id="response">Response Placeholder</p>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const fetchBtn = document.getElementById('fetch-btn')
-        const responseText = document.getElementById('response-output')
-        const fetchPoedexBtn = document.getElementById('fetch-pokedex')
-        const fetchKantoPoedexBtn = document.getElementById('fetch-Kanto-pokedex')
-        const fetchHoennPoedexBtn = document.getElementById('fetch-Hoenn-pokedex')
-        const ipAddress = document.getElementById('ip-address')
         const webScrapBtn = document.getElementById('web-scrap-btn')
-
+        const responseText = document.getElementById('response')
+        
         webScrapBtn.addEventListener('click', async() => {
           const resp = await fetch('/.netlify/functions/web-scrap').then(resp => resp.json())
-          //url = "https://api.allorigins.win/get?url=https://www.bing.com/search?q=venom"
-          // const resp = await fetch(url)
-          //           .then(response => {
-          //             if (response.ok) {
-          //               var v = response.json()
-          //               console.log(v)
-          //               return v
-          //             }
-          //             throw new Error('Network response was not ok.')
-          //           })
-          //           .then(data => responseText.innerText = JSON.stringify(data));
-          // const resp = await fetch(url).then(r => r.json())
-          // console.log(resp)
           responseText.innerText = JSON.stringify(resp)
-        })
-
-        ipAddress.addEventListener('click', async() => {
-          const resp = await fetch('/.netlify/functions/get-ip-address').then(resp => resp.json())
-          responseText.innerText = JSON.stringify(resp)
-        })
-
-        fetchBtn.addEventListener('click', async() => {
-          const resp = await fetch('/.netlify/functions/hello-world').then(resp => resp.json())
-          responseText.innerText = JSON.stringify(resp)
-        })
-        fetchPoedexBtn.addEventListener('click', async() => {
-          const resp = await fetch('/.netlify/functions/pokedex').then(resp => resp.json())
-          responseText.innerText = JSON.stringify(resp)
-        })
-        fetchKantoPoedexBtn.addEventListener('click', async() => {
-          const resp = await fetch('/.netlify/functions/pokedex',
-          {
-            method:'POST',
-            body: JSON.stringify({
-              region: "kanto"
-            })
-          }).then(resp => resp.json())
-          responseText.innerText = JSON.stringify(resp)
-        })
-        fetchHoennPoedexBtn.addEventListener('click', async() => {
-          const resp = await fetch('/.netlify/functions/pokedex',
-          {
-            method:'POST',
-            body: JSON.stringify({
-              region: "hoenn"
-            })
-          }).then(resp => resp.json())
-          responseText.innerText = JSON.stringify(resp)
-        })
+        })        
       })
     </script>
   </body>
