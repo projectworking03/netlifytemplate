@@ -2,9 +2,9 @@ const axios = require("axios");
 
 exports.handler = async function (event, context) {
   // Form the URL
-  var movie_title = "Venom";
+  const movieTitle = event.queryStringParameters.title;
   const url = `https://www.bing.com/search?q=${encodeURI(
-    movie_title + " movie"
+    movieTitle + " movie"
   )}`;
 
   // Fetch the HTML

@@ -7,20 +7,34 @@
     <title>MovieHunt API</title>
   </head>
   <body>
-    <h1>Server status: OK</h1>
-    <button id="web-scrap-btn">Web Scrap</button>
-    <p id="response">Response Placeholder</p>
+    <form>
+      <label for="title">Enter a Movie Title:</label>
+      <input type="text">
+      <button type="submit">Search</button>
+    </form>
+
+    <div class="result"></div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const webScrapBtn = document.getElementById('web-scrap-btn')
-        const responseText = document.getElementById('response')
-        
-        webScrapBtn.addEventListener('click', async() => {
-          const resp = await fetch('/.netlify/functions/web-scrap').then(resp => resp.json())
-          responseText.innerText = JSON.stringify(resp)
-        })        
+      const form = document.querySelector("form");
+      const input = document.querySelector("input");
+      const result = document.querySelector(".result");
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const title = input.value;
+        const response = await fetch(`/.netlify/functions/web-scrap?title=${title}`).then(res => res.json());
+        result.innerText = JSON.stringify(response)
       })
+      // document.addEventListener('DOMContentLoaded', () => {
+      //   const webScrapBtn = document.getElementById('web-scrap-btn')
+      //   const responseText = document.getElementById('response')
+
+      //   webScrapBtn.addEventListener('click', async() => {
+      //     const resp = await fetch('/.netlify/functions/web-scrap').then(resp => resp.json())
+      //     responseText.innerText = JSON.stringify(resp)
+      //   })        
+      // })
     </script>
   </body>
 </html>
