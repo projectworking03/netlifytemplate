@@ -28,13 +28,19 @@
 
         webScrapBtn.addEventListener('click', async() => {
           const resp = await fetch('/.netlify/functions/web-scrap').then(resp => resp.json())
-          // url = "https://www.bing.com/search?q=venom"
+          //url = "https://api.allorigins.win/get?url=https://www.bing.com/search?q=venom"
           // const resp = await fetch(url)
           //           .then(response => {
-          //             if (response.ok) return response.json()
+          //             if (response.ok) {
+          //               var v = response.json()
+          //               console.log(v)
+          //               return v
+          //             }
           //             throw new Error('Network response was not ok.')
           //           })
           //           .then(data => responseText.innerText = JSON.stringify(data));
+          // const resp = await fetch(url).then(r => r.json())
+          // console.log(resp)
           responseText.innerText = JSON.stringify(resp)
         })
 
