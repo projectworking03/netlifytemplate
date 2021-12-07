@@ -26,15 +26,6 @@
         const response = await fetch(`/.netlify/functions/web-scrap?title=${title}`).then(res => res.json());
         result.innerText = JSON.stringify(response)
       })
-      // document.addEventListener('DOMContentLoaded', () => {
-      //   const webScrapBtn = document.getElementById('web-scrap-btn')
-      //   const responseText = document.getElementById('response')
-
-      //   webScrapBtn.addEventListener('click', async() => {
-      //     const resp = await fetch('/.netlify/functions/web-scrap').then(resp => resp.json())
-      //     responseText.innerText = JSON.stringify(resp)
-      //   })        
-      // })
     </script>
   </body>
 </html>
