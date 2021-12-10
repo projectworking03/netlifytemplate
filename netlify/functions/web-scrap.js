@@ -12,12 +12,14 @@ exports.handler = async function (event, context) {
 
   // Extract the ratings and streaming platforms
   const ratings = getRatings(html);
+  const avgRating = calculateAvgRating(ratings)
   const streamingPlatforms = getStreamingPlatforms(html);
 
   // Build the response
   const response = {
     ratings,
     streamingPlatforms,
+    avgRating
   };
 
   // Send the response
@@ -35,6 +37,45 @@ exports.handler = async function (event, context) {
     }),
   };
 };
+
+const calculateAvgRating = (ratings) =>
+{
+  var totalRating = 0.0
+  var totalProvider = 0.0
+  ratings.forEach(element => {
+    console.log(element)
+    var s = element.value 
+    console.log("CQ DEC: " + s.indexOf(".") + " " + s.indexOf("/"))
+    if(s.indexOf(".")!= -1 && s.indexOf("/"))
+    {
+      try
+      {
+      const rate = parseFloat(s.substring(0,s.indexOf("/"))) * 10
+      console.log("Rate: " + rate)
+      totalRating += rate
+      totalProvider++
+      }catch(err){console.log("Err in decimal: " + err)}
+    }
+    else 
+    {
+      try
+      {
+        const rate = parseFloat(s)
+        console.log("Rate: " + rate)
+        if(rate > 0 && rate < 100)
+        {
+          console.log("Rate: " + rate)
+          totalRating += rate
+          totalProvider++
+        }
+      }catch(err){console.log("Err in int: " + err)}
+    }    
+  });
+  console.log("TR: " + totalRating)
+  console.log("TP: " + totalProvider)
+  return parseInt(totalRating/totalProvider)
+}
+
 
 // Fetches th HTML given a URL
 const fetchHtml = async (url) => {
