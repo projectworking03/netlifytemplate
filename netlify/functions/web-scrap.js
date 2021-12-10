@@ -46,13 +46,21 @@ const calculateAvgRating = (ratings) =>
     console.log(element)
     var s = element.value 
     console.log("CQ DEC: " + s.indexOf(".") + " " + s.indexOf("/"))
-    if(s.indexOf(".")!= -1 && s.indexOf("/"))
+
+    if(s.indexOf("/") != -1)
     {
       try
       {
-      const rate = parseFloat(s.substring(0,s.indexOf("/"))) * 10
+      const rate = parseFloat(s.substring( 0, s.indexOf("/")))
+      const outOff =  parseFloat(s.substring(s.indexOf("/") + 1))
       console.log("Rate: " + rate)
-      totalRating += rate
+      console.log("OutOff: " + outOff)
+      console.log("RATE: " + (rate * outOff))
+      if(rate == NaN)
+        throw new Error("Rate was NaN")
+      if(outOff == NaN)
+        throw new Error("outOff was NaN")
+      totalRating += rate * outOff
       totalProvider++
       }catch(err){console.log("Err in decimal: " + err)}
     }
@@ -61,7 +69,7 @@ const calculateAvgRating = (ratings) =>
       try
       {
         const rate = parseFloat(s)
-        console.log("Rate: " + rate)
+        //console.log("Rate: " + rate)
         if(rate > 0 && rate < 100)
         {
           console.log("Rate: " + rate)
@@ -73,7 +81,8 @@ const calculateAvgRating = (ratings) =>
   });
   console.log("TR: " + totalRating)
   console.log("TP: " + totalProvider)
-  return parseInt(totalRating/totalProvider)
+  console.log("AVG: " + Math.round(totalRating/totalProvider))
+  return Math.round(totalRating/totalProvider)
 }
 
 
